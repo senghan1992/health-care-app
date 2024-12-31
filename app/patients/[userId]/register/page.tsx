@@ -4,8 +4,12 @@ import { SearchParamProps } from "@/types";
 import Image from "next/image";
 import React from "react";
 
-const Register = async ({ params }: SearchParamProps) => {
-  const { userId } = await params;
+const Register = async ({
+  params,
+}: {
+  params: Promise<{ userId: string }>;
+}) => {
+  const userId = (await params).userId;
   const user = await getUser(userId);
 
   return (
