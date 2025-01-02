@@ -4,6 +4,8 @@ import { SearchParamProps } from "@/types";
 import Image from "next/image";
 import React from "react";
 
+import * as Sentry from "@sentry/react";
+
 const Register = async ({
   params,
 }: {
@@ -11,6 +13,8 @@ const Register = async ({
 }) => {
   const userId = (await params).userId;
   const user = await getUser(userId);
+
+  Sentry.metrics.set("user_view_register", user.name);
 
   return (
     <div className="flex h-screen max-h-screen">
